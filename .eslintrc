@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+        "no-param-reassign": ["error", { "props": false }],
+        "import/no-named-as-default": 0,
+        "prefer-arrow-callback": "error",
+        "func-style": ["error", "expression"],
+        "react/prop-types": 0,
+        "no-unused-vars": 0
+    }
+}
