@@ -1,0 +1,63 @@
+[
+  {
+    "id": 1,
+    "name": "Folder 1",
+    "children": [
+      {
+        "id": 2,
+        "name": "Photos"
+      },
+      {
+        "id": 3,
+        "name": "Assets",
+        "children": [
+          {
+            "id": 4,
+            "name": "photo.tmp"
+          },
+          {
+            "id": 5,
+            "name": "data.tmp"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "file.tmp"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Folder 2",
+    "children": [
+      {
+        "id": 8,
+        "name": "Folder 3",
+        "children": [
+          {
+            "id": 9,
+            "name": "data.tmp"
+          },
+          {
+            "id": 10,
+            "name": "doc.tmp"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "name": "file.tmp"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "backup.tmp"
+  },
+  {
+    "id": 13,
+    "name": "Empty",
+    "children": []
+  }
+]
