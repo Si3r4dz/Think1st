@@ -9,40 +9,75 @@
     flex-direction: column;
     min-height: 500px;
     justify-content: flex-start;
+    align-items: center;
     margin: 20px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
+    padding: 15px;
     width: 60%;
-    background-color: #808080;
+    border: 2px #808080 solid;
+    border-radius: 20px;
 }
 
 .title {
     display: flex;
-    width: 95%;
+    flex-wrap: wrap;
+    width: 90%;
     font-size: 18px;
-    margin: 10px 0px 10px 10px;
+    margin: 10px 20px 10px 20px;
     padding: 15px;
     border-radius: 20px;
     background-color: #00000033;
+    color: #000;
 }
 
 .list {
+    width: 90%;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     margin: 10px 0px 10px 10px;
+    padding: 10px 0px 0px 10px;
     gap: 20px;
 }
 
-.folder {
-    color: white;
+.element {
+    color: #000;
     cursor: pointer;
     display: inline;
     display: flex;
     align-items: center;
+    padding: 7px;
+}
+.element:hover{
+    border: 2px #808080 solid;
+    border-radius: 5px;
+    padding: 5px;
 }
 
-.file {
-    color: white;
-    cursor: pointer;
+.noselect {
     display: flex;
     align-items: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
+.button {
+    border-style: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button:hover{
+    border: 2px black solid;
+    padding: 8px;
+}
+.button:disabled:hover{
+    border: none;
+    padding: 10px;
+}
+

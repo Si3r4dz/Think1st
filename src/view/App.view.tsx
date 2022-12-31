@@ -1,63 +1,43 @@
-import React from 'react'
 import '../styles/App.css'
 import MockData from '../consts/mockup.json'
 import { useState } from 'react'
-import { AiOutlineFolderOpen, AiFillFile, AiOutlineCaretLeft } from 'react-icons/ai'
-interface file {
-    id: number
-    name: string
-    children: Array<file>
-}
+import { AiOutlineCaretLeft } from 'react-icons/ai'
+import file from '../interfaces/file'
+import FileExplorer from '../components/FileExplorer'
 
-const fileExplorer = (
-    data: typeof MockData,
-    onClick: (e: file, isFolder: boolean, key: number) => void
-) => {
-    return Object.entries(data).map(([key, element]) => {
-        const isFolder = element.children !== undefined
-        return (
-            <div
-                key={element.id}
-                className={`${isFolder ? 'folder' : 'file'}`}
-                onClick={() => onClick(element as file, isFolder, parseInt(key, 10))}
-            >
-                {isFolder ? <AiOutlineFolderOpen size={30} /> : <AiFillFile size={30} />}
-                {element.name}
-            </div>
-        )
-    })
-}
+const mainFolderName = 'Folder główny'
 
 const App = () => {
-    const [folderName, setFolderName] = useState('Folder główny')
+    const [folderName, setFolderName] = useState(mainFolderName)
     const [selectedData, setSelectedData] = useState<typeof MockData>(MockData)
     const [selectedChildrenIDs, setSelectedChildrenIDs] = useState<number[]>([])
 
     const handleOnPrevButtonClick = () => {
-        const tmp = selectedChildrenIDs
-        let tempArr: any = MockData
-        let name = ''
-        tmp.pop()
-        if (tmp.length === 0) {
+        const tmpIdTable = selectedChildrenIDs
+        let tempArr = MockData
+        let name = mainFolderName
+        tmpIdTable.pop()
+        if (tmpIdTable.length === 0) {
             setSelectedData(MockData)
-            setFolderName('Folder główny')
+            setFolderName(name)
         } else {
-            tmp.forEach((val) => {
-                name = tempArr[val].name
-                tempArr = tempArr[val].children
+            tmpIdTable.forEach((val) => {
+                const item = tempArr.filter((obj) => obj.id === val)[0]
+                name += ` - ${item.name}`
+                tempArr = item.children as Array<file>
             })
             setFolderName(name)
             setSelectedData(tempArr)
         }
         tempArr = []
-        setSelectedChildrenIDs(tmp)
-    }
+        setSelectedChildrenIDs(tmpIdTable)
+}
 
     const handleOnElementClick = (element: file, isFolder: boolean, key: number) => {
         if (!isFolder) alert(`Plik o nazwie ${element.name} został klikniety`)
         else {
             setSelectedData(element.children)
-            setFolderName(element.name)
+            setFolderName((state) => state + ` - ${element.name}`)
             setSelectedChildrenIDs((state) => [...state, key])
         }
     }
@@ -66,10 +46,14 @@ const App = () => {
         <div className="container">
             <div className="file_box">
                 <div className="title">
-                    <AiOutlineCaretLeft onClick={handleOnPrevButtonClick} />
-                    {folderName}
+                    <span className="noselect">
+                        <button onClick={handleOnPrevButtonClick} className="button" type='button' disabled={selectedChildrenIDs.length > 0 ? false : true}>
+                            <AiOutlineCaretLeft />
+                        </button>
+                        {folderName}
+                    </span>
                 </div>
-                <div className="list">{fileExplorer(selectedData, handleOnElementClick)}</div>
+                <FileExplorer data={selectedData} onClick={handleOnElementClick} />
             </div>
         </div>
     )
